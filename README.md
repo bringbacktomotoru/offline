@@ -4,24 +4,24 @@ The Java HTTP server embedded in offline APKs of **Tomotoru** (*Hello Kitty Happ
 
 ## Build an offline APK
 
-Follow the [game repository’s Quick Start](https://github.com/bringbacktomotoru/game#quick-start) to install the build tools, initialize the `tomoffline` submodule, and fetch the base APK and assets. From that checkout, build the offline variant:
+Follow the [tools repository’s Quick Start](https://github.com/bringbacktomotoru/tools#quick-start) to install the build tools and initialize the `tomoffline` submodule. From that checkout, build the offline variant:
 
 ```bash
 python -m tools.build.build_apk --mode offline
 ```
 
-The game repository pins this project as a submodule. Its builder compiles the Android sources as Java 8, merges them into `classes.dex`, and calls `OfflineServer.start(Context)` during application startup. This repository’s [releases](https://github.com/bringbacktomotoru/offline/releases) provide source snapshots; APK builds are handled by the game repository.
+The tools repository pins this project as a submodule. Its builder compiles the Android sources as Java 8, merges them into `classes.dex`, and calls `OfflineServer.start(Context)` during application startup. This repository’s [releases](https://github.com/bringbacktomotoru/offline/releases) provide source snapshots; download the APKs from [Builds](https://github.com/bringbacktomotoru/builds/releases).
 
 ## Runtime and testing
 
 | Environment | Entry point | Assets and saves |
 | --- | --- | --- |
 | Android APK | `OfflineServer.start(Context)` | Reads bundled assets and writes under the app-private `files/tomotoru_saves/` directory. |
-| Desktop JVM | `StandaloneMain` | Reads assets and writes saves in local directories. Used by the game repository’s integration tests and excluded from APK builds. |
+| Desktop JVM | `StandaloneMain` | Reads assets and writes saves in local directories. Used by the tools repository’s integration tests and excluded from APK builds. |
 
 Both entry points listen on `127.0.0.1:18080` by default. `GET /health` returns `{"status":"healthy","embedded":true}` once the server is listening. The desktop runner accepts `--port`, `--sxr-dir`, `--saves-dir`, and `--debug`.
 
-After preparing the dependencies and extracted assets in the game checkout, run its [Java integration tests](https://github.com/bringbacktomotoru/game/blob/main/tests/test_embedded_java_server.py):
+After following the [test setup](https://github.com/bringbacktomotoru/tools#run-tests) in the tools checkout, run its [Java integration tests](https://github.com/bringbacktomotoru/tools/blob/main/tests/test_embedded_java_server.py):
 
 ```bash
 python -m pytest -v tests/test_embedded_java_server.py
@@ -33,5 +33,6 @@ See the [project wiki](https://github.com/bringbacktomotoru/offline/wiki) for st
 
 ## Related repositories
 
-- [Game](https://github.com/bringbacktomotoru/game) — Android client analysis, asset tooling, and the APK build pipeline.
+- [Game](https://github.com/bringbacktomotoru/game) — preserved Android client code and resources.
+- [Tools](https://github.com/bringbacktomotoru/tools) — asset utilities, APK builder, and integration tests.
 - [Server](https://github.com/bringbacktomotoru/server) — JavaScript implementation for running a separate Tomotoru game server.
