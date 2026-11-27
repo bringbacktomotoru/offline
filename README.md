@@ -1,6 +1,8 @@
 # Tomotoru Offline Server
 
-The Java HTTP server embedded in offline APKs of **Tomotoru** (*Hello Kitty Happy Life*). It starts with the Android app, serves the bundled game assets over loopback, and saves player progress in the app’s private storage. The offline APK needs no separate server.
+The **Tomotoru** (*Hello Kitty Happy Life*) **Offline APK** has a Java HTTP server built into the app. You can play without Internet or a separate server, and progress is saved on your device. The server starts with the Android app, serves bundled assets over loopback, and writes saves in the app’s private storage.
+
+Download the revival APKs from [Tomotoru Builds](https://github.com/bringbacktomotoru/builds/releases). The **official Online APK** needs Internet and connects to the server run by this project's maintainer. That server must be available to play, and it stores your progress. The [v0.0.1 archive](https://github.com/bringbacktomotoru/builds/releases/tag/v0.0.1) contains the unmodified original APK, which is neither revival edition.
 
 ## Build an offline APK
 
